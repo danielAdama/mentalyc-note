@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "mentalyc-note"
+version = "0.1.0"
+description = ""
+authors = ["danielAdama <adamadaniel321@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langgraph = "^0.2.56"
+langchain = "^0.3.10"
+langchain-core = "^0.3.23"
+langchain-groq = "^0.2.1"
+langchain-openai = "^0.2.12"
+pydotenv = "^0.0.7"
+langchain-community = "^0.3.10"
+rich = "^13.9.4"
+fastapi = "^0.115.6"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
