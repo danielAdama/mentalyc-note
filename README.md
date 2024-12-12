@@ -178,6 +178,7 @@ Ensure you have the following installed on your system:
 - Python 3.10+
 - pip (Python package installer)
 - Docker (optional, for containerized deployment)
+- Docker Compose
 
 ### Installation
 
@@ -187,18 +188,30 @@ Ensure you have the following installed on your system:
 git clone https://github.com/danielAdama/mentalcy-note.git
 cd mentalcy-note
 ```
+2. **Create an Environment File**:
+Create a .env file in the root directory of the project with the following command:
+```sh
+touch .env
+```
+After the creation of the .env, add the following environment variables:
+```sh
+GROQ_API_KEY=<your-groq-api-key>
+```
 
-2. **Install dependencies**:
+3. **Install dependencies**:
 
 ```bash
 poetry install
 ```
+```bash
+poetry shell
+```
 
-3. **Configure the application**:
+4. **Configure the application**:
 
 Edit `app_config.yml` to set up any required configurations.
 
-4. **Verify**  
+5. **Verify**  
    - The backend API should be running at `http://localhost:8002/docs`.
    - The frontend should be accessible at `http://localhost:8081`.
 
