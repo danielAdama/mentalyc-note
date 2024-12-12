@@ -1,3 +1,5 @@
+import dotenv
+dotenv.load_dotenv(dotenv.find_dotenv(), override=True)
 from typing import List, Union
 from pydantic import BaseModel, Field, field_validator
 from langchain_core.prompts import ChatPromptTemplate

@@ -1,0 +1,10 @@
+# Dockerfile.frontend
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+
+# Copy the frontend files (HTML, CSS, JavaScript)
+COPY ./frontend/ .
+
+# Expose the frontend port
+EXPOSE 80

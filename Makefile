@@ -7,7 +7,3 @@ start_dev:
 start_prod:
 	@echo "Running app in production..."
 	gunicorn -w 2 -k uvicorn.workers.UvicornWorker src.main:app -b 0.0.0.0:8020
-
-run_test:
-	@echo "Running tests..."
-	cd src && python3 -m unittest discover tests

@@ -5,6 +5,7 @@ from .schema import gad7_schema, phq9_schema, sentiment_schema, state
 from pathlib import Path
 from .routers.router import assessment_router
 from langgraph.graph import END, StateGraph
+import time
 
 class MentalycNoteAgent:
     """
@@ -15,7 +16,7 @@ class MentalycNoteAgent:
         BASE_DIR (Path): The base directory of the project.
         PROMPT_DIR (Path): The directory containing prompt templates.
     """
-    
+
     BASE_DIR = Path('__file__').absolute().parent
     PROMPT_DIR = BASE_DIR / "mentalyc_ai" / "prompt" / "templates"
 
@@ -115,18 +116,41 @@ class MentalycNoteAgent:
         workflow.set_entry_point("sentiment_classifier_agent")
         return workflow.compile()
     
-    def __call__(self, sessions):
+    def __call__(self, sessions, max_retries=3, retry_delay=2):
         """
         Invokes the workflow with the given sessions and returns the summarized output.
+        Includes a retry mechanism in case of failure.
 
         Args:
             sessions (List[Dict[str, Any]]): The sessions to be processed.
+            max_retries (int): The maximum number of retry attempts.
+            retry_delay (int): The delay between retry attempts in seconds.
 
         Returns:
-            str: The summarized output from the SummarizerAgent.
+            dict: The summarized output from the workflow.
         """
-        print(sessions)
-        output=self.flow.invoke({"sessions": sessions, "user": self.user_id})
-        message = output["messages"][0]
-        if message.name == "SummarizerAgent":
-            return message.content
+        result = {}
+        attempts = 0
+
+        while attempts < max_retries:
+            try:
+                for output in self.flow.stream({"sessions": sessions, "user": self.user_id}):
+                    for key, value in output.items():
+                        message = value["messages"][-1]
+                        if message.name == "ClassifierAgent":
+                            result['sentiment'] = message.content
+                        elif message.name == "GAD7Agent":
+                            result['GAD7_analysis'] = value['session_results']
+                        elif message.name == "PHQ9Agent":
+                            result['PHQ9_analysis'] = value['session_results']
+                        elif message.name == "SummarizerAgent":
+                            result['insight'] = message.content
+                return result
+            except Exception as e:
+                print(f"Attempt {attempts + 1} failed: {e}")
+                attempts += 1
+                if attempts < max_retries:
+                    print(f"Retrying in {retry_delay} seconds...")
+                    time.sleep(retry_delay)
+
+        raise RuntimeError("Maximum retry attempts reached. Workflow invocation failed.")

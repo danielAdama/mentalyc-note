@@ -27,17 +27,17 @@ You will receive:
 {{
     "assessment_type": "GAD-7 or PHQ-9",
     "session_details": {{
-        "session_1": {{
+        "session1": {{
             "severity_classification": "classification",
             "justification": "session context justification"
         }},
-        "session_2": {{
+        "session2": {{
             "severity_classification": "classification",
             "justification": "session context justification"
         }},
         "progress_report_across_sessions": {{
-            "Symptom_1": "Progress (e.g., Improvement/Deterioration/Plateau)",
-            "Symptom_2": "Progress",
+            "Symptom1": "Progress (e.g., Improvement/Deterioration/Plateau)",
+            "Symptom2": "Progress",
             "...": "...",
             "total_score": "Progress"
         }}

@@ -6,7 +6,26 @@ import functools
 import json
 
 class Node:
+    """
+    Node class manages the workflow nodes for various agents in the mental health analysis system.
+    It handles the invocation of agents and the processing of session data.
+
+    Attributes:
+        sentiment_classifier_instance (Agent): Instance of the sentiment classifier agent.
+        summarizer_instance (Agent): Instance of the summarizer agent.
+        gad7_instance (Agent): Instance of the GAD-7 agent.
+        phq9_instance (Agent): Instance of the PHQ-9 agent.
+    """
     def __init__(self, sentiment_classifier_instance, summarizer_instance, gad7_instance, phq9_instance):
+        """
+        Initializes the Node with the given agent instances.
+
+        Args:
+            sentiment_classifier_instance (Agent): Instance of the sentiment classifier agent.
+            summarizer_instance (Agent): Instance of the summarizer agent.
+            gad7_instance (Agent): Instance of the GAD-7 agent.
+            phq9_instance (Agent): Instance of the PHQ-9 agent.
+        """
         self.sentiment_classifier_instance = sentiment_classifier_instance
         self.summarizer_instance = summarizer_instance
         self.gad7_node = functools.partial(
@@ -17,15 +36,24 @@ class Node:
         )
 
     def sentiment_classifier_node(self, state):
+        """
+        Processes the sentiment classification node.
+
+        Args:
+            state (dict): The current state of the workflow.
+
+        Returns:
+            dict: The updated state after processing the sentiment classification.
+        """
         name = "ClassifierAgent"
-        session = state.get("sessions", {}).get('session_1')
+        session = state.get("sessions", {}).get('session1')
         user = state.get('user')
 
         if not session:
             raise ValueError("Session data not found")
 
         output = self.invoke_instance(self.sentiment_classifier_instance, session)
-        result = AIMessage(content=json.loads(output.model_dump_json())['classification'])
+        result = AIMessage(content=json.loads(output.model_dump_json())['classification'], name=name)
         return {
             "messages": [result],
             "user": user,
@@ -34,6 +62,15 @@ class Node:
         }
     
     def summarizer_node(self, state):
+        """
+        Processes the summarizer node.
+
+        Args:
+            state (dict): The current state of the workflow.
+
+        Returns:
+            dict: The updated state after processing the summarizer.
+        """
         name = "SummarizerAgent"
         user = state.get("user")
         session_results = state.get("session_results", {})
@@ -49,14 +86,24 @@ class Node:
         }
 
     def agent_node(self, state, instance, agent_name, completion_message):
+        """
+        Processes a generic agent node.
+
+        Args:
+            state (dict): The current state of the workflow.
+            instance (Agent): The agent instance to be invoked.
+            agent_name (str): The name of the agent.
+            completion_message (str): The completion message for the agent.
+
+        Returns:
+            dict: The updated state after processing the agent node.
+        """
         sessions = state.get("sessions", {})
         user = state.get("user")
         session_results = state.get("session_results", {})
 
         for session_id, session_data in sessions.items():
             output = self.invoke_instance(instance, session_data)
-            result = AIMessage(content=output.model_dump_json())
-            print("RESULT".upper(), result)
             session_results[session_id] = json.loads(output.model_dump_json())
 
         return {
@@ -67,6 +114,16 @@ class Node:
         }
 
     def invoke_instance(self, instance, session_data):
+        """
+        Invokes the given agent instance with the session data.
+
+        Args:
+            instance (Agent): The agent instance to be invoked.
+            session_data (dict): The session data to be processed.
+
+        Returns:
+            AIMessage: The output message from the agent.
+        """
         output = instance.invoke(
             {
                 "messages": [HumanMessage(content=json.dumps(session_data))]
@@ -75,6 +132,15 @@ class Node:
         return output
 
     def analyze_report(self, sessions):
+        """
+        Analyzes the progress report across sessions.
+
+        Args:
+            sessions (dict): The sessions to be analyzed.
+
+        Returns:
+            list: The list of progress reports.
+        """
         progress_reports = []
         session_keys = sorted(sessions.keys())
 

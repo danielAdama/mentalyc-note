@@ -1,0 +1,45 @@
+# Stage 1: Build the FastAPI backend
+FROM --platform=linux/amd64 ubuntu:22.04
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive \
+    TZ=Africa/Lagos \
+    POETRY_HTTP_TIMEOUT=800
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    gcc \
+    python3.11 \
+    python3.11-venv \
+    python3.11-dev \
+    libpq-dev \
+    curl \
+    git \
+    make \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a symbolic link for python to point to python3.11
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
+
+# Install pip
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+
+# Install Poetry using pip
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
+
+# Copy and rename prod.pyproject.toml to pyproject.toml
+COPY prod.pyproject.toml ./pyproject.toml
+RUN poetry install --no-dev \
+    && poetry run pip install uvicorn gunicorn
+RUN poetry run pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+COPY . .
+
+# Expose the API port
+EXPOSE 8000
+
+ENTRYPOINT ["make", "start_prod"]

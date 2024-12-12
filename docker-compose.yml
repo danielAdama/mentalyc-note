@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  backend:
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8001:8000"
+    networks:
+      - app-network
+
+  frontend:
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
