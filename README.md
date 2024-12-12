@@ -12,6 +12,16 @@ Key features include:
 - **Comprehensive Documentation**: Detailed explanation of the AI approach, design decisions, and instructions for running the solution.  
 
 ---
+## Frontend Interface
+<img width="1680" alt="mentalyc 4" src="https://github.com/user-attachments/assets/3532d3e6-85e0-409f-a488-aaf4812e2391" />
+
+<img width="1680" alt="mentalyc 5" src="https://github.com/user-attachments/assets/6724dfd9-0e57-4edb-8b3d-1618061139da" />
+
+## Backend Interface
+
+<img width="1680" alt="mentalyc 1" src="https://github.com/user-attachments/assets/4ae64eb7-3f73-42ba-b015-c362b48085f8" />
+
+![mentalyc 3](https://github.com/user-attachments/assets/13bc336d-15a8-43be-ae49-aaec401133e6)
 
 ## Project Structure
 
