@@ -62,7 +62,49 @@ mentalyc_ai
 ├── main.py               # FastAPI application setup
 └── README.md             # Documentation
 ```
+## Explanation of Key Directories and Files
 
+### `mentalyc_ai/`
+This is the core application folder containing all backend logic and functionality.
+
+#### `agents/`
+- `agent.py`: Contains logic for agent behavior and decision-making.
+- `base_agent.py`: Base class for agents with shared functionality.
+
+#### `nodes/`
+- `node.py`: Defines nodes used within the application workflow or decision trees.
+
+#### `prompt/templates/`
+Contains text-based templates used for various AI model prompts:
+- `classifier_system_message.txt`: Template for classifier prompts.
+- `gad7_system_message.txt`: Template for GAD-7 prompts.
+- `phq9_system_message.txt`: Template for PHQ-9 prompts.
+- `summarizer_system_message.txt`: Template for summarization tasks.
+
+#### `routers/`
+- `router.py`: Defines API routes for the application.
+
+#### `schema/`
+Contains data schemas used for validation and serialization:
+- `gad7_schema.py`: Schema for GAD-7-related data.
+- `phq9_schema.py`: Schema for PHQ-9-related data.
+- `sentiment_schema.py`: Schema for sentiment-related data.
+- `state.py`: Defines state management logic.
+- `summarize_schema.py`: Schema for summarization tasks.
+
+### Frontend
+A simple static frontend for user interaction.
+- `index.html`: HTML structure of the application.
+- `script.js`: JavaScript logic for the frontend.
+- `styles.css`: Styling for the frontend.
+
+### Entry Points
+- `mentalyc_ai.py`: Main script to launch the Mentalyc AI functionality.
+- `main.py`: Entry point to start the FastAPI application.
+
+---
+
+## How to Use
 ---
 
 ## Getting Started
@@ -71,7 +113,7 @@ mentalyc_ai
 
 Ensure you have the following installed on your system:
 
-- Python 3.9+
+- Python 3.10+
 - pip (Python package installer)
 - Docker (optional, for containerized deployment)
 
@@ -80,14 +122,14 @@ Ensure you have the following installed on your system:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/mentalcy-note.git
+git clone https://github.com/<your-username>/mentalcy-note.git
 cd mentalcy-note
 ```
 
 2. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+poetry install
 ```
 
 3. Configure the application:
@@ -101,7 +143,7 @@ Edit `app_config.yml` to set up any required configurations.
 Run the FastAPI application using:
 
 ```bash
-uvicorn main:app --reload
+make start_dev
 ```
 
 The API will be available at [http://localhost:8002](http://localhost:8002).
@@ -111,13 +153,13 @@ The API will be available at [http://localhost:8002](http://localhost:8002).
 1. Build the Docker image:
 
 ```bash
-docker build -t mentalcy-service .
+make compose_up
 ```
 
 2. Run the container:
 
 ```bash
-docker run -p 8000:8000 mentalcy-service
+make compose_up
 ```
 
 ---
