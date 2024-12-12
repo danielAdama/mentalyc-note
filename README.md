@@ -1,4 +1,3 @@
-# mentalyc-note
 # AI Psychotherapy Progress Notes API
 
 ### Description:  
