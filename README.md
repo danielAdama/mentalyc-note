@@ -181,26 +181,26 @@ Ensure you have the following installed on your system:
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**:
 
 ```bash
 git clone https://github.com/danielAdama/mentalcy-note.git
 cd mentalcy-note
 ```
 
-2. Install dependencies:
+2. **Install dependencies**:
 
 ```bash
 poetry install
 ```
 
-3. Configure the application:
+3. **Configure the application**:
 
 Edit `app_config.yml` to set up any required configurations.
 
 4. **Verify**  
    - The backend API should be running at `http://localhost:8002/docs`.
-   - The frontend should be accessible at `http://localhost:8080`.
+   - The frontend should be accessible at `http://localhost:8081`.
 
 ### Running the Application
 
