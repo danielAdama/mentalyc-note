@@ -27,7 +27,7 @@ Once the sentiment is classified, the **assessment router** determines the next 
    - **If classified as Anxious**: The session data is routed to the **GAD-7 agent**, which specializes in Generalized Anxiety Disorder assessments.  
    - **If classified as Depressed**: The session data is routed to the **PHQ-9 agent**, which specializes in depression assessments.  
 
-#### 3. **GAD-7 and PHQ-9 Agents**  
+#### 3. **GAD-7 and PHQ-9 Agents Nodes**  
 These specialized agents assess the client's symptoms based on the industry-standard GAD-7 and PHQ-9 frameworks:  
    - **GAD-7 Agent**: Scores the client’s responses to seven items designed to evaluate the severity of anxiety symptoms.  
    - **PHQ-9 Agent**: Scores the client’s responses to nine items designed to evaluate the severity of depression symptoms.  
