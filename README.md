@@ -1,7 +1,15 @@
 # mentalyc-note
-# Mentalyc Service API
+# AI Psychotherapy Progress Notes API
 
-Mentalyc Service API is a FastAPI-based backend service designed to support therapeutic and mental health assessment solutions. The application incorporates multi-agent architecture and facilitates functionalities such as text summarization, classification, and session tracking.
+### Description:  
+This repository contains a Proof of Concept (POC) for tracking therapy progress using AI-driven assessments. Built for **Mentalyc**, the solution enables psychotherapists to track patient progress by analyzing structured session notes generated from audio recordings. The project utilizes industry-standard psychotherapy tests (e.g., GAD-7, PHQ-9) and multi-agent systems to provide a comprehensive evaluation of symptom progression. 
+
+Key features include:  
+- **Structured Assessments**: Leveraging predefined templates to capture and analyze patient data (e.g., SOAP notes).  
+- **Symptom Tracking**: AI models detect and compare symptom severity or frequency between sessions to evaluate progress.  
+- **Multi-Agent Architecture**: Modular agents tailored for different assessment protocols (GAD-7, PHQ-9, etc.).  
+- **Therapist Dashboard**: A simple, FastAPI-powered interface for submitting sessions and visualizing patient progress.  
+- **Comprehensive Documentation**: Detailed explanation of the AI approach, design decisions, and instructions for running the solution.  
 
 ---
 
