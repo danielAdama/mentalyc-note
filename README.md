@@ -41,8 +41,10 @@ The final step in the pipeline is the **summarizer node**, which performs the fo
    - **Progress Report Calculation**: Evaluates session-to-session changes to determine if the client’s condition has improved, plateaued, or worsened.  
    - **Summary Generation**: Provides a summary of the session, including actionable insights, therapy progress analysis, and encouragement for the client.  
 
----
+## Workflow Graph
+![agent_graph_workflow](https://github.com/user-attachments/assets/1e85bfa4-b796-48b2-97de-9ba75e76c0d7)
 
+---
 ### Key Highlights of the Multi-Agent Approach:  
 - **Modular Design**: Each node and agent focuses on a specific task, ensuring clarity and flexibility.  
 - **Seamless Routing**: Sentiment-based routing ensures that assessments are tailored to the client’s emotional state.  
