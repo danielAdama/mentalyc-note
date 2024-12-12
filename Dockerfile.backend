@@ -31,15 +31,13 @@ RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 
-# Copy and rename prod.pyproject.toml to pyproject.toml
-COPY prod.pyproject.toml ./pyproject.toml
+COPY pyproject.toml ./
 RUN poetry install --no-dev \
     && poetry run pip install uvicorn gunicorn
-RUN poetry run pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 COPY . .
 
 # Expose the API port
-EXPOSE 8000
+EXPOSE 8002
 
 ENTRYPOINT ["make", "start_prod"]

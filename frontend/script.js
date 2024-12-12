@@ -21,7 +21,7 @@ form.addEventListener('submit', async (event) => {
         formData.append('sessions', file);
     }
 
-    const apiUrl = `http://0.0.0.0:8020/v1/therapy/analysis/?user_id=${encodeURIComponent(userId)}`;
+    const apiUrl = `http://localhost:8002/v1/therapy/analysis/?user_id=${encodeURIComponent(userId)}`;
 
     try {
         const response = await fetch(apiUrl, {
