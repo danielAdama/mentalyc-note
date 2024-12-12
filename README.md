@@ -9,7 +9,46 @@ Key features include:
 - **Symptom Tracking**: AI models detect and compare symptom severity or frequency between sessions to evaluate progress.  
 - **Multi-Agent Architecture**: Modular agents tailored for different assessment protocols (GAD-7, PHQ-9, etc.).  
 - **Therapist Dashboard**: A simple, FastAPI-powered interface for submitting sessions and visualizing patient progress.  
-- **Comprehensive Documentation**: Detailed explanation of the AI approach, design decisions, and instructions for running the solution.  
+- **Comprehensive Documentation**: Detailed explanation of the AI approach, design decisions, and instructions for running the solution.
+
+### Approach: Multi-Agent Solution for Therapy Progress Tracking  
+
+This project follows a **Multi-Agent Solution** approach to effectively analyze session data and track therapy progress. Below is a detailed breakdown of the approach:  
+
+#### 1. **Entry Point Node: Sentiment Classification**  
+The entry point is a **sentiment classification node** that evaluates the session text templates. This node determines whether the session content reflects signs of:  
+   - **Anxiety** (classified as *Anxious*)  
+   - **Depression** (classified as *Depressed*)  
+
+The sentiment classification guides subsequent routing based on the predicted emotional state.  
+
+#### 2. **Assessment Router**  
+Once the sentiment is classified, the **assessment router** determines the next step:  
+   - **If classified as Anxious**: The session data is routed to the **GAD-7 agent**, which specializes in Generalized Anxiety Disorder assessments.  
+   - **If classified as Depressed**: The session data is routed to the **PHQ-9 agent**, which specializes in depression assessments.  
+
+#### 3. **GAD-7 and PHQ-9 Agents**  
+These specialized agents assess the client's symptoms based on the industry-standard GAD-7 and PHQ-9 frameworks:  
+   - **GAD-7 Agent**: Scores the client’s responses to seven items designed to evaluate the severity of anxiety symptoms.  
+   - **PHQ-9 Agent**: Scores the client’s responses to nine items designed to evaluate the severity of depression symptoms.  
+
+Each agent provides:  
+   - **Severity Classification**: Determining the level of anxiety or depression.  
+   - **Justifications**: Contextual explanations based on the client’s responses.  
+
+#### 4. **Summarizer Node**  
+The final step in the pipeline is the **summarizer node**, which performs the following:  
+   - **Progress Report Calculation**: Evaluates session-to-session changes to determine if the client’s condition has improved, plateaued, or worsened.  
+   - **Summary Generation**: Provides a summary of the session, including actionable insights, therapy progress analysis, and encouragement for the client.  
+
+---
+
+### Key Highlights of the Multi-Agent Approach:  
+- **Modular Design**: Each node and agent focuses on a specific task, ensuring clarity and flexibility.  
+- **Seamless Routing**: Sentiment-based routing ensures that assessments are tailored to the client’s emotional state.  
+- **Therapy Progress Insights**: The summarizer node generates actionable insights and a detailed progress analysis for therapists.  
+
+This approach ensures an end-to-end pipeline from sentiment classification to progress reporting, providing psychotherapists with meaningful insights to guide therapy sessions effectively.
 
 ---
 ## Frontend Interface
