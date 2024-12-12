@@ -119,6 +119,10 @@ mentalyc_ai
 ├── config_helper.py      # Helper functions for configuration
 ├── logger.py             # Logging configuration
 ├── main.py               # FastAPI application setup
+├── Dockerfile.backend        # Dockerfile for backend
+├── Dockerfile.frontend       # Dockerfile for frontend
+├── docker-compose.yml        # Docker Compose file
+├── Makefile                  # Task management
 └── README.md             # Documentation
 ```
 ## Explanation of Key Directories and Files
