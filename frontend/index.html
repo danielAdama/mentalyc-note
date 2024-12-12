@@ -4,28 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Model Performance Tracking</title>
+    <title>AI Therapy Session Tracking</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Real-Time Model Performance Tracking</h1>
-        <form id="uploadForm" enctype="multipart/form-data">
-            <label for="imageUpload">Upload Image:</label>
-            <input type="file" id="imageUpload" name="image" accept="image/*" required>
-            <button type="submit">Classify Image</button>
+        <div class="title">AI Therapy Session Tracking</div>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="user-id">User ID:</label>
+                <input type="text" id="user-id" placeholder="Enter User ID" required>
+            </div>
+            <div class="form-group">
+                <label for="session-files">Session Files (.txt):</label>
+                <input type="file" id="session-files" multiple required>
+            </div>
+            <button type="submit" class="upload-btn" id="upload-btn">Upload</button>
         </form>
-        <div id="imagePreview" class="image-preview">
-            <img id="uploadedImage" src="" alt="Uploaded Image">
-        </div>
-        <div id="results" class="results">
-            <h2>Results</h2>
-            <p>Prediction: <span id="prediction"></span></p>
-            <p>Probability: <span id="probability"></span>%</p>
-            <p>Label: <span id="label"></span></p>
-            <p>Latency: <span id="latency"></span> seconds</p>
-            <p>Throughput: <span id="throughput"></span> predictions per second</p>
+
+        <div class="output-section" id="output-section">
+            <div class="output-card" id="sentiment-output">
+                <h4>Sentiment Analysis</h4>
+                <p><strong>Sentiment:</strong> <span id="sentiment">undefined</span></p>
+            </div>
+            <div class="output-card" id="gad7-output">
+                <div id="gad7-analysis"></div>
+            </div>
+            <div class="output-card" id="phq9-output">
+                <div id="phq9-analysis"></div>
+            </div>
+            <div class="output-card" id="insight-output">
+                <h4>Insight</h4>
+                <p id="insight">undefined</p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
